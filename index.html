@@ -3,23 +3,39 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 		<script src="./app.js" defer></script>
 		<link rel="stylesheet" href="./style.css" />
 		<title>Odd Duck</title>
 	</head>
 	<body>
+		<header>
+			<!-- <div id="logo-image">
+				<img src="./Images/duck-logo.jpg" alt="Duck logo" />
+			</div> -->
+			<h1>Odd Duck</h1>
+		</header>
 		<main>
 			<div class="Container">
-				<h1>Odd Duck</h1>
-				<p>We want to know, which of these products do you prefer?</p>
 				<section id="imageSection">
 					<img />
 					<img />
 					<img />
 				</section>
-				<ul id="results"></ul>
 			</div>
-			<button id="view-results">Button</button>
+			<section id="resultsSection">
+				<h2>Results</h2>
+				<ul id="results"></ul>
+			</section>
+			<canvas id="resultsChart"> </canvas>
+			<button id="view-results">View Results</button>
+			<p>
+				Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus
+				deserunt quae earum delectus laudantium soluta harum obcaecati non, odit
+				quod sunt accusamus cum. Sit obcaecati debitis quae vitae dolorum
+				minima.
+			</p>
 		</main>
+		<footer>Footer</footer>
 	</body>
 </html>
