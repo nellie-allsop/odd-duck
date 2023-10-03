@@ -51,6 +51,7 @@ function handleProductClick(event) {
 	if (userClicks === maxClicks) {
 		alert("You have run out of votes");
 		// now don't run the rest of the function if it's true
+		showChart();
 		return;
 	}
 
@@ -115,72 +116,66 @@ const allProducts = [
 
 productContainer.addEventListener("click", handleProductClick);
 
-// function showChart(){
-// 	let results = document.querySelector("canvas");
-// 	for
-// }
+function showChart() {
+	const ctx = document.getElementById("resultsChart");
+	let productName = [];
+	let views = [];
+	let clicks = [];
 
-function showResults() {
-	let results = document.querySelector("ul");
-	// loop through products and make li for each one
 	for (let i = 0; i < allProducts.length; i++) {
-		const li = document.createElement("li");
-		// const Product = Products[i];
-		li.textContent =
-			allProducts[i].name +
-			" was viewed " +
-			allProducts[i].views +
-			" times and clicked " +
-			allProducts[i].clicks +
-			" times. ";
-		results.appendChild(li);
+		productName.push(allProducts[i].name);
+		views.push(allProducts[i].views);
+		clicks.push(allProducts[i].clicks);
 	}
-}
 
-const viewResults = document.getElementById("view-results");
-viewResults.addEventListener("click", showResults);
+	const data = {
+		labels: productName,
+		datasets: [
+			{
+				label: "clicks",
+				data: clicks,
+				backgroundColor: ["red", "orange", "yellow", "green", "blue", "purple"],
+			},
+
+			{
+				label: "views",
+				data: views,
+				backgroundColor: ["red", "orange", "yellow", "green", "blue", "purple"],
+			},
+		],
+	};
+
+	const config = new Chart(ctx, {
+		type: "bar",
+		data: data,
+		options: {
+			scales: {
+				y: {
+					beginAtZero: true,
+				},
+			},
+		},
+	});
+}
 
 createProducts();
 
-const ctx = document.getElementById("resultsChart");
-// parameters inside the brackets, where we're writing it to and second is options
-const config = new Chart(ctx, {
-	type: "bar",
-	// data needs to be an object
-	data: {
-		labels: [
-			"Banana",
-			"Bathroom",
-			"Boots",
-			"Breakfast",
-			"Bubblegum",
-			"Chair",
-			"Cthulu",
-			"Dog duck",
-			"Dragon",
-			"Pen",
-			"Pet sweep",
-			"Bag",
-			"Scissors",
-			"Shark",
-			"Sweep",
-			"Tauntaun",
-			"Unicorn",
-			"Water can",
-			"Wine glass",
-		],
-		datasets: [
-			{
-				label: "Number of votes",
-				borderWidth: 2,
-				backgroundColor: ["red", "orange", "yellow", "green", "blue", "purple"],
-			},
-			{
-				label: "Number of views",
-				data: [30, 31, 11],
-				borderWidth: 6,
-				backgroundColor: ["orange", "blue", "green"],
-			},
-		],
-	},
-});
+// const viewResults = document.getElementById("view-results");
+// viewResults.addEventListener("click", showResults);
+
+// function showResults() {
+// 	let results = document.querySelector("ul");
+// 	// loop through products and make li for each one
+// 	for (let i = 0; i < allProducts.length; i++) {
+// 		const li = document.createElement("li");
+// 		// const Product = Products[i];
+// 		li.textContent =
+// 			allProducts[i].name +
+// 			" was viewed " +
+// 			allProducts[i].views +
+// 			" times and clicked " +
+// 			allProducts[i].clicks +
+// 			" times. ";
+// 		results.appendChild(li);
+// 	}
+// }
