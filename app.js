@@ -1,10 +1,11 @@
 let userClicks = 0;
-let maxClicks = 5;
+let maxClicks = 25;
 
 let productContainer = document.querySelector("section");
 let image1 = document.querySelector("section img:first-child");
 let image2 = document.querySelector("section img:nth-child(2)");
 let image3 = document.querySelector("section img:last-child");
+let canvas = document.querySelector("canvas");
 
 // name is the parameter within the brackets
 // a constructor function
@@ -114,6 +115,11 @@ const allProducts = [
 
 productContainer.addEventListener("click", handleProductClick);
 
+// function showChart(){
+// 	let results = document.querySelector("canvas");
+// 	for
+// }
+
 function showResults() {
 	let results = document.querySelector("ul");
 	// loop through products and make li for each one
@@ -135,3 +141,46 @@ const viewResults = document.getElementById("view-results");
 viewResults.addEventListener("click", showResults);
 
 createProducts();
+
+const ctx = document.getElementById("resultsChart");
+// parameters inside the brackets, where we're writing it to and second is options
+const config = new Chart(ctx, {
+	type: "bar",
+	// data needs to be an object
+	data: {
+		labels: [
+			"Banana",
+			"Bathroom",
+			"Boots",
+			"Breakfast",
+			"Bubblegum",
+			"Chair",
+			"Cthulu",
+			"Dog duck",
+			"Dragon",
+			"Pen",
+			"Pet sweep",
+			"Bag",
+			"Scissors",
+			"Shark",
+			"Sweep",
+			"Tauntaun",
+			"Unicorn",
+			"Water can",
+			"Wine glass",
+		],
+		datasets: [
+			{
+				label: "Number of votes",
+				borderWidth: 2,
+				backgroundColor: ["red", "orange", "yellow", "green", "blue", "purple"],
+			},
+			{
+				label: "Number of views",
+				data: [30, 31, 11],
+				borderWidth: 6,
+				backgroundColor: ["orange", "blue", "green"],
+			},
+		],
+	},
+});
