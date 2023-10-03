@@ -8,3 +8,9 @@
 	grid-template-columns: 1fr 10% 1fr 40%;
 	grid-template-rows: 14rem 3rem 6rem 6rem 6em;
 }
+
+#imagesection {
+	display: flex;
+	justify-content: space-between;
+	border: 1px solid black;
+}
