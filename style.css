@@ -1,3 +1,8 @@
+body {
+	background-color: #f4a261;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
 * {
 	box-sizing: border-box;
 }
@@ -10,6 +15,7 @@
 
 #imageSection img {
 	width: 400px;
+	border: 1px solid black;
 }
 
 #logo-image {
@@ -17,4 +23,14 @@
 	max-height: 400px;
 	max-width: 20%;
 	align-items: left;
+}
+
+h1 {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #2a9d8f;
+}
+
+p,
+h2 {
+	color: #264653;
 }
