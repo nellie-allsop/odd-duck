@@ -1,19 +1,66 @@
-let userClicks = 0;
-let maxClicks = 25;
-
 let productContainer = document.querySelector("section");
 let image1 = document.querySelector("section img:first-child");
 let image2 = document.querySelector("section img:nth-child(2)");
 let image3 = document.querySelector("section img:last-child");
 let canvas = document.querySelector("canvas");
 
+let userClicks = 0;
+let maxClicks = 5;
+
+const products = [];
+
 // name is the parameter within the brackets
 // a constructor function
-function Product(name, src) {
+function Product(name, src, views, clicks) {
 	this.name = name;
 	this.src = src;
-	this.views = 0;
-	this.clicks = 0;
+	this.views = views;
+	this.clicks = clicks;
+
+	products.push(this);
+}
+
+if (localStorage === 0) {
+	new Product("Banana", "./Images/banana.jpg", 0, 0);
+
+	new Product("Bathroom", "./Images/bathroom.jpg", 0, 0);
+
+	new Product("Boots", "./Images/boots.jpg", 0, 0);
+
+	new Product("Breakfast", "./Images/breakfast.jpg", 0, 0);
+
+	new Product("Bubblegum", "./Images/bubblegum.jpg", 0, 0);
+
+	new Product("Chair", "./Images/chair.jpg", 0, 0);
+
+	new Product("Cthulu", "./Images/cthulhu.jpg", 0, 0);
+
+	new Product("Dog duck", "./Images/dog-duck.jpg", 0, 0);
+
+	new Product("Dragon", "./Images/dragon.jpg", 0, 0);
+
+	new Product("Pen", "./Images/pen.jpg", 0, 0);
+
+	new Product("Pet sweep", "./Images/pet-sweep.jpg", 0, 0);
+
+	new Product("Bag", "./Images/bag.jpg", 0, 0);
+
+	new Product("Scissors", "./Images/scissors.jpg", 0, 0);
+
+	new Product("Shark", "./Images/shark.jpg", 0, 0);
+
+	new Product("Sweep", "./Images/sweep.png", 0, 0);
+
+	new Product("Tauntaun", "./Images/tauntaun.jpg", 0, 0);
+
+	new Product("Unicorn", "./Images/unicorn.jpg", 0, 0);
+
+	new Product("Water can", "./Images/water-can.jpg", 0, 0);
+
+	new Product("Wine glass", "./Images/wine-glass.jpg", 0, 0);
+} else {
+	localStorage.getItem(products);
+	// if there is something in localStorage then get that and turn into my products
 }
 
 function getRandomIndex() {
@@ -29,7 +76,7 @@ function createProducts() {
 	while (
 		product1Index === product2Index ||
 		product1Index === product3Index ||
-		product2Index == product3Index
+		product2Index === product3Index
 	) {
 		product2Index = getRandomIndex();
 		product3Index = getRandomIndex();
@@ -47,11 +94,29 @@ function createProducts() {
 	allProducts[product3Index].views++;
 }
 
+// trying out for lab
+
+// If selected in last trio then don’t show in next
+// Turn the trio into an array and then for loop through that, if anything in that array comes up then
+// break the loop and randomly generate three more images
+
+// let createProducts() =
+
+// for (let i = 0; i < allProducts.length; i++) {
+// 	if (createProducts === allProducts[i].name) {
+// 		createProducts.getRandomIndex
+// 	}
+// 		//break stops the loop because we've found what we're looking for
+// product1Index = getRandomIndex();
+// product2Index = getRandomIndex();
+// product3Index = getRandomIndex();
+
 function handleProductClick(event) {
 	if (userClicks === maxClicks) {
 		alert("You have run out of votes");
 		// now don't run the rest of the function if it's true
 		showChart();
+		localStorage.getItem(products); // put up to date products array into local storage
 		return;
 	}
 
@@ -72,51 +137,40 @@ function handleProductClick(event) {
 			break;
 		}
 	}
+
+	createProducts();
 }
 
-const allProducts = [
-	new Product("Banana", "./Images/banana.jpg"),
+// the array for the JSON, only if nothing in local storage
 
-	new Product("Bathroom", "./Images/bathroom.jpg"),
+//trying out lab 13
 
-	new Product("Boots", "./Images/boots.jpg"),
+// send the Array
+// take the array
 
-	new Product("Breakfast", "./Images/breakfast.jpg"),
+// function checkLocal(){
+// 	const prodsFromLS = JSON.parse(localStorage.getItem("Product"));
 
-	new Product("Bubblegum", "./Images/bubblegum.jpg"),
+// 	if (prodsFromLS){
+// 		for (let i = 0; i < prodsFromLS.length; i++){
+// 			const newProd
+// 		}
+// 	}
 
-	new Product("Chair", "./Images/chair.jpg"),
+// // wanting to put the votes array into local storage, so 25 clicks worth
 
-	new Product("Cthulu", "./Images/cthulhu.jpg"),
+// // tapping into all products[i].clicks or this.clicks? - also need to take into account views
 
-	new Product("Dog duck", "./Images/dog-duck.jpg"),
+// // want to have votes come up in the console
 
-	new Product("Dragon", "./Images/dragon.jpg"),
-
-	new Product("Pen", "./Images/pen.jpg"),
-
-	new Product("Pet sweep", "./Images/pet-sweep.jpg"),
-
-	new Product("Bag", "./Images/bag.jpg"),
-
-	new Product("Scissors", "./Images/scissors.jpg"),
-
-	new Product("Shark", "./Images/shark.jpg"),
-
-	new Product("Sweep", "./Images/sweep.png"),
-
-	new Product("Tauntaun", "./Images/tauntaun.jpg"),
-
-	new Product("Unicorn", "./Images/unicorn.jpg"),
-
-	new Product("Water can", "./Images/water-can.jpg"),
-
-	new Product("Wine glass", "./Images/wine-glass.jpg"),
-];
+// function putIntoLocalStorage(){
+// 	const votesStringified = JSON.stringify(products)
+// }
 
 productContainer.addEventListener("click", handleProductClick);
 
 function showChart() {
+	// first argument is ctx
 	const ctx = document.getElementById("resultsChart");
 	let productName = [];
 	let views = [];
@@ -144,7 +198,7 @@ function showChart() {
 			},
 		],
 	};
-
+	// second argument
 	const config = new Chart(ctx, {
 		type: "bar",
 		data: data,
@@ -158,6 +212,7 @@ function showChart() {
 	});
 }
 
+// happens when the page loads
 createProducts();
 
 // const viewResults = document.getElementById("view-results");
