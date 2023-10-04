@@ -7,7 +7,7 @@ let canvas = document.querySelector("canvas");
 let userClicks = 0;
 let maxClicks = 5;
 
-const products = [];
+const allProducts = [];
 
 // name is the parameter within the brackets
 // a constructor function
@@ -17,10 +17,10 @@ function Product(name, src, views, clicks) {
 	this.views = views;
 	this.clicks = clicks;
 
-	products.push(this);
+	allProducts.push(this);
 }
 
-if (localStorage === 0) {
+if (localStorage.getItem("products") === null) {
 	new Product("Banana", "./Images/banana.jpg", 0, 0);
 
 	new Product("Bathroom", "./Images/bathroom.jpg", 0, 0);
@@ -59,7 +59,17 @@ if (localStorage === 0) {
 
 	new Product("Wine glass", "./Images/wine-glass.jpg", 0, 0);
 } else {
-	localStorage.getItem(products);
+	const productsLS = JSON.parse(localStorage.getItem("allProducts"));
+
+	for (let i = 0; i < productsLS.length; i++) {
+		new Product(
+			productsLS[i].name,
+			productsLS[i].src,
+			productsLS[i].views,
+			productsLS[i].clicks
+		);
+	}
+
 	// if there is something in localStorage then get that and turn into my products
 }
 
@@ -116,7 +126,7 @@ function handleProductClick(event) {
 		alert("You have run out of votes");
 		// now don't run the rest of the function if it's true
 		showChart();
-		localStorage.getItem(products); // put up to date products array into local storage
+		localStorage.setItem("allProducts", JSON.stringify(allProducts)); // put up to date products array into local storage
 		return;
 	}
 
