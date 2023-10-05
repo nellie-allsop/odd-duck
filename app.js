@@ -20,7 +20,7 @@ function Product(name, src, views, clicks) {
 	allProducts.push(this);
 }
 
-if (localStorage.getItem("products") === null) {
+if (localStorage.getItem("allProducts") === null) {
 	new Product("Banana", "./Images/banana.jpg", 0, 0);
 
 	new Product("Bathroom", "./Images/bathroom.jpg", 0, 0);
