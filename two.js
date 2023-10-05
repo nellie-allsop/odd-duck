@@ -28,13 +28,13 @@ function showChart() {
 			{
 				label: "clicks",
 				data: clicks,
-				backgroundColor: ["red", "orange", "yellow", "green", "blue", "purple"],
+				backgroundColor: ["#264653"],
 			},
 
 			{
 				label: "views",
 				data: views,
-				backgroundColor: ["red", "orange", "yellow", "green", "blue", "purple"],
+				backgroundColor: ["#2A9D8F"],
 			},
 		],
 	};
