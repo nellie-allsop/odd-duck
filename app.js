@@ -125,7 +125,6 @@ function handleProductClick(event) {
 	if (userClicks === maxClicks) {
 		alert("You have run out of votes");
 		// now don't run the rest of the function if it's true
-		showChart();
 		localStorage.setItem("allProducts", JSON.stringify(allProducts)); // put up to date products array into local storage
 		return;
 	}
@@ -178,49 +177,6 @@ function handleProductClick(event) {
 // }
 
 productContainer.addEventListener("click", handleProductClick);
-
-function showChart() {
-	// first argument is ctx
-	const ctx = document.getElementById("resultsChart");
-	let productName = [];
-	let views = [];
-	let clicks = [];
-
-	for (let i = 0; i < allProducts.length; i++) {
-		productName.push(allProducts[i].name);
-		views.push(allProducts[i].views);
-		clicks.push(allProducts[i].clicks);
-	}
-
-	const data = {
-		labels: productName,
-		datasets: [
-			{
-				label: "clicks",
-				data: clicks,
-				backgroundColor: ["red", "orange", "yellow", "green", "blue", "purple"],
-			},
-
-			{
-				label: "views",
-				data: views,
-				backgroundColor: ["red", "orange", "yellow", "green", "blue", "purple"],
-			},
-		],
-	};
-	// second argument
-	const config = new Chart(ctx, {
-		type: "bar",
-		data: data,
-		options: {
-			scales: {
-				y: {
-					beginAtZero: true,
-				},
-			},
-		},
-	});
-}
 
 // happens when the page loads
 createProducts();
