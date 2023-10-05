@@ -1,23 +1,17 @@
-console.log("hello");
+// console.log("hello");
 
-const allProducts = [];
+// const allProducts = [];
 
-function Product(name, src, views, clicks) {
-	this.name = name;
-	this.src = src;
-	this.views = views;
-	this.clicks = clicks;
+// const resultsButton = document.getElementById("resultsButton");
 
-	allProducts.push(this);
-}
+// const parsedProducts = JSON.parse(localStorage.getItem("allProducts"));
 
-const resultsButton = document.getElementById("resultsButton");
-
-const parsedProducts = JSON.parse(localStorage.getItem("allProducts"));
-
-const handleButtonClick = function showChart() {
+function showChart() {
 	// first argument is ctx
+	const allProducts = JSON.parse(localStorage.getItem("allProducts"));
+
 	const ctx = document.getElementById("resultsChart");
+
 	let productName = [];
 	let views = [];
 	let clicks = [];
@@ -45,7 +39,7 @@ const handleButtonClick = function showChart() {
 		],
 	};
 	// second argument
-	const config = new Chart(ctx, {
+	new Chart(ctx, {
 		type: "bar",
 		data: data,
 		options: {
@@ -56,6 +50,6 @@ const handleButtonClick = function showChart() {
 			},
 		},
 	});
-};
+}
 
-resultsButton.addEventListener("click", handleButtonClick);
+showChart();
